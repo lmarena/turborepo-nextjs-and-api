@@ -37,4 +37,10 @@ await esbuild.build({
   logLevel: "info",
 });
 
+// Restore the source file after bundling
+if (existsSync(tsBackup)) {
+  renameSync(tsBackup, tsSource);
+  console.log("📦 Restored source file");
+}
+
 console.log("✅ Vercel function built successfully!");
