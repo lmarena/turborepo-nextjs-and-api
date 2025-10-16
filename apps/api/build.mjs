@@ -19,6 +19,9 @@ await esbuild.build({
   platform: "node",
   target: "node22",
   format: "esm",
+  loader: {
+    ".backup": "ts",
+  },
   external: [
     // Don't bundle Node.js built-ins
     "node:*",
