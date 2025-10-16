@@ -19,8 +19,8 @@
     "emitDecoratorMetadata": true,
     "declarationMap": true
   },
-  // Include only files in src directory
-  "include": ["src", "src/**/*.json"],
+  // Include files in src directory and package.json
+  "include": ["src", "src/**/*.json", "package.json"],
   "exclude": ["dist", "node_modules"],
   "references": [
     {
