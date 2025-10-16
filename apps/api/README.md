@@ -79,10 +79,13 @@ pnpm test
 
 This project is configured for Vercel serverless deployment:
 
-1. The `src/index.ts` file exports a Vercel-compatible handler using `hono/vercel`
-2. In production (Vercel), the app runs as a serverless function
-3. In development, the app runs with `@hono/node-server` for a better dev experience
-4. The `vercel.json` configuration routes all requests to the API handler
+1. The `api/index.ts` file serves as the Vercel entrypoint and imports from `hono` (required for Vercel detection)
+2. In production (Vercel), the app runs as a serverless function using `hono/vercel` adapter
+3. In development, the app runs with `@hono/node-server` via `src/index.ts` for a better dev experience
+4. The `vercel.json` configuration routes all requests to the `/api` handler
+
+**Important for Monorepo Setup:**
+When deploying to Vercel, make sure to set the **Root Directory** to `apps/api` in your Vercel project settings.
 
 To deploy:
 
