@@ -1,6 +1,7 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
+import { meaningOfLife } from "@repo/common/meaning-of-life";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -31,6 +32,7 @@ export default function Home() {
           height={38}
           priority
         />
+        <div>The meaning of life is {meaningOfLife()}</div>
         <ol>
           <li>
             Get started by editing <code>apps/web/app/page.tsx</code>
