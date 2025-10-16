@@ -73,6 +73,22 @@ Test
 pnpm test
 ```
 
+## Deployment
+
+### Vercel
+
+This project includes a Vercel configuration for serverless deployment:
+
+1. The `api/index.ts` file serves as the Vercel entrypoint
+2. The `vercel.json` configuration routes all requests to the API handler
+3. Deploy using the Vercel CLI or by connecting your GitHub repository
+
+To deploy:
+
+```sh
+vercel
+```
+
 ## Code Tour
 
 Base hono app exported from [app.ts](./src/app.ts). Local development uses [@hono/node-server](https://hono.dev/docs/getting-started/nodejs) defined in [index.ts](./src/index.ts) - update this file or create a new entry point to use your preferred runtime.
