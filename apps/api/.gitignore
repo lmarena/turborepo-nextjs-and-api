@@ -35,5 +35,6 @@ dist
 # bundled vercel function
 api/index.js
 api/index.js.map
+api/index.ts.backup
 
 .dev.vars

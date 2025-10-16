@@ -1,10 +1,19 @@
 import * as esbuild from "esbuild";
-import { readFileSync } from "fs";
+import { readFileSync, renameSync, existsSync } from "fs";
 
 const packageJson = JSON.parse(readFileSync("./package.json", "utf-8"));
 
+// Rename the source file temporarily during build
+const tsSource = "./api/index.ts";
+const tsBackup = "./api/index.ts.backup";
+
+if (existsSync(tsSource)) {
+  renameSync(tsSource, tsBackup);
+  console.log("📦 Backed up source file for build");
+}
+
 await esbuild.build({
-  entryPoints: ["./api/index.ts"],
+  entryPoints: [tsBackup],
   bundle: true,
   outfile: "./api/index.js",
   platform: "node",
