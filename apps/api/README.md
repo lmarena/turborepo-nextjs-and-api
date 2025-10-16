@@ -106,9 +106,14 @@ The build process will automatically:
 1. Clean TypeScript build cache to ensure fresh builds
 2. Build workspace dependencies (`pnpm --filter @repo/common build`)
 3. Bundle the application with `esbuild` via `pnpm build:vercel`
-4. Deploy the bundled `api/index.js` as a serverless function
+4. Remove source `api/index.ts` file in CI/Vercel (keeps only the bundled `api/index.js`)
+5. Deploy the bundled `api/index.js` as a serverless function
 
-**Note:** The build command removes `.tsbuildinfo` files to prevent TypeScript incremental build issues where the cache indicates files are up-to-date but the actual output files don't exist (common in CI/CD environments).
+**Note:**
+
+- The build command removes `.tsbuildinfo` files to prevent TypeScript incremental build issues
+- In CI/Vercel environments, the source TypeScript file is removed after bundling to ensure only the bundled JavaScript is deployed and executed
+- A backup (`api/index.ts.original`) is kept locally for development but is git-ignored
 
 ## Code Tour
 

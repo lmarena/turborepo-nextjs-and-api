@@ -1,27 +1,31 @@
 import * as esbuild from "esbuild";
-import { readFileSync, renameSync, existsSync } from "fs";
+import {
+  readFileSync,
+  renameSync,
+  existsSync,
+  unlinkSync,
+  copyFileSync,
+} from "fs";
 
 const packageJson = JSON.parse(readFileSync("./package.json", "utf-8"));
 
-// Rename the source file temporarily during build
+// Keep a backup of the source file in git-ignored location
 const tsSource = "./api/index.ts";
-const tsBackup = "./api/index.ts.backup";
+const tsBackup = "./api/index.ts.original";
 
-if (existsSync(tsSource)) {
-  renameSync(tsSource, tsBackup);
-  console.log("📦 Backed up source file for build");
+// Create a backup before building (for local development)
+if (existsSync(tsSource) && !existsSync(tsBackup)) {
+  copyFileSync(tsSource, tsBackup);
+  console.log("📦 Created backup of source file");
 }
 
 await esbuild.build({
-  entryPoints: [tsBackup],
+  entryPoints: [tsSource],
   bundle: true,
   outfile: "./api/index.js",
   platform: "node",
   target: "node22",
   format: "esm",
-  loader: {
-    ".backup": "ts",
-  },
   external: [
     // Don't bundle Node.js built-ins
     "node:*",
@@ -37,10 +41,12 @@ await esbuild.build({
   logLevel: "info",
 });
 
-// Restore the source file after bundling
-if (existsSync(tsBackup)) {
-  renameSync(tsBackup, tsSource);
-  console.log("📦 Restored source file");
+// In CI/Vercel environment, remove the TypeScript source so only the bundle is used
+if (process.env.CI || process.env.VERCEL) {
+  if (existsSync(tsSource)) {
+    unlinkSync(tsSource);
+    console.log("🗑️  Removed source TypeScript file (CI/Vercel environment)");
+  }
 }
 
 console.log("✅ Vercel function built successfully!");

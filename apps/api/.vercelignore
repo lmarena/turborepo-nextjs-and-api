@@ -1,0 +1,16 @@
+# Ignore TypeScript source in api directory - use bundled JS instead
+api/index.ts
+api/index.ts.backup
+
+# Ignore source files - only deploy bundled function
+src/
+
+# Ignore build artifacts
+dist/
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Ignore dev dependencies
+node_modules/
+.turbo/
+

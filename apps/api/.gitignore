@@ -36,5 +36,6 @@ dist
 api/index.js
 api/index.js.map
 api/index.ts.backup
+api/index.ts.original
 
 .dev.vars
