@@ -77,21 +77,35 @@ pnpm test
 
 ### Vercel
 
-This project is configured for Vercel serverless deployment:
+This project is configured for Vercel serverless deployment with automatic bundling:
 
-1. The `api/index.ts` file serves as the Vercel entrypoint and imports from `hono` (required for Vercel detection)
-2. In production (Vercel), the app runs as a serverless function using `hono/vercel` adapter
-3. In development, the app runs with `@hono/node-server` via `src/index.ts` for a better dev experience
-4. The `vercel.json` configuration routes all requests to the `/api` handler
+1. **Build Process**: The `build:vercel` script uses `esbuild` to bundle the entire application (including workspace dependencies) into a single serverless function
+2. **Entrypoint**: The `api/index.ts` file serves as the Vercel entrypoint and imports from `hono` (required for Vercel detection)
+3. **Bundling**: All dependencies, including `@repo/common`, are bundled into `api/index.js` for deployment
+4. **Local Development**: In development, the app runs with `@hono/node-server` via `src/index.ts` for a better dev experience
+5. **Routing**: The `vercel.json` configuration routes all requests to the `/api` handler
 
 **Important for Monorepo Setup:**
 When deploying to Vercel, make sure to set the **Root Directory** to `apps/api` in your Vercel project settings.
+
+**Build Commands:**
+
+- Development: `pnpm dev`
+- Type-check: `pnpm typecheck`
+- Build (local): `pnpm build`
+- Build (Vercel): `pnpm build:vercel` (runs automatically on Vercel)
 
 To deploy:
 
 ```sh
 vercel
 ```
+
+The build process will automatically:
+
+1. Install dependencies with `pnpm install`
+2. Bundle the application with `esbuild` via `pnpm build:vercel`
+3. Deploy the bundled `api/index.js` as a serverless function
 
 ## Code Tour
 

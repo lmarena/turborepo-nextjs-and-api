@@ -32,4 +32,8 @@ test.db
 .vercel
 dist
 
+# bundled vercel function
+api/index.js
+api/index.js.map
+
 .dev.vars
