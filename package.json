@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "tsc -b"
   },
- "devDependencies": {
+  "devDependencies": {
     "eslint": "^9.15.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
