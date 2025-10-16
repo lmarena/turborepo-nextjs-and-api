@@ -17,7 +17,9 @@
     // For decorators
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "declarationMap": true
+    "declarationMap": true,
+    // Allow importing JSON modules
+    "resolveJsonModule": true
   },
   // Include files in src directory and package.json
   "include": ["src", "src/**/*.json", "package.json"],
