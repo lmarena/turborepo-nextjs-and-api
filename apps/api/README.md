@@ -77,11 +77,12 @@ pnpm test
 
 ### Vercel
 
-This project includes a Vercel configuration for serverless deployment:
+This project is configured for Vercel serverless deployment:
 
-1. The `api/index.ts` file serves as the Vercel entrypoint
-2. The `vercel.json` configuration routes all requests to the API handler
-3. Deploy using the Vercel CLI or by connecting your GitHub repository
+1. The `src/index.ts` file exports a Vercel-compatible handler using `hono/vercel`
+2. In production (Vercel), the app runs as a serverless function
+3. In development, the app runs with `@hono/node-server` for a better dev experience
+4. The `vercel.json` configuration routes all requests to the API handler
 
 To deploy:
 

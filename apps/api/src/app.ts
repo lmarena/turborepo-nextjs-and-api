@@ -13,7 +13,6 @@ routes.forEach((route) => {
   app.route("/", route);
 });
 
-
 console.log(`meaningOfLife: ${meaningOfLife()}`);
 
 export type AppType = (typeof routes)[number];
