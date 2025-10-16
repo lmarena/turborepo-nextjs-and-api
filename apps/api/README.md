@@ -103,9 +103,11 @@ vercel
 
 The build process will automatically:
 
-1. Install dependencies with `pnpm install`
+1. Build workspace dependencies using Turbo (`turbo run build --filter='@repo/api^...'`)
 2. Bundle the application with `esbuild` via `pnpm build:vercel`
 3. Deploy the bundled `api/index.js` as a serverless function
+
+**Note:** The build command ensures that `@repo/common` and other workspace dependencies are built before bundling.
 
 ## Code Tour
 

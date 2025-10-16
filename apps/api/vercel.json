@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm install && pnpm build:vercel",
+  "buildCommand": "cd ../.. && turbo run build --filter='@repo/api^...' && cd apps/api && pnpm build:vercel",
   "rewrites": [
     {
       "source": "/(.*)",
