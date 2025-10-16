@@ -103,11 +103,12 @@ vercel
 
 The build process will automatically:
 
-1. Build workspace dependencies using Turbo (`turbo run build --filter='@repo/api^...'`)
-2. Bundle the application with `esbuild` via `pnpm build:vercel`
-3. Deploy the bundled `api/index.js` as a serverless function
+1. Clean TypeScript build cache to ensure fresh builds
+2. Build workspace dependencies (`pnpm --filter @repo/common build`)
+3. Bundle the application with `esbuild` via `pnpm build:vercel`
+4. Deploy the bundled `api/index.js` as a serverless function
 
-**Note:** The build command ensures that `@repo/common` and other workspace dependencies are built before bundling.
+**Note:** The build command removes `.tsbuildinfo` files to prevent TypeScript incremental build issues where the cache indicates files are up-to-date but the actual output files don't exist (common in CI/CD environments).
 
 ## Code Tour
 

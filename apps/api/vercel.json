@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd ../.. && turbo run build --filter='@repo/api^...' && cd apps/api && pnpm build:vercel",
+  "buildCommand": "cd ../.. && rm -f packages/common/tsconfig.tsbuildinfo && pnpm --filter @repo/common build && cd apps/api && pnpm build:vercel",
   "rewrites": [
     {
       "source": "/(.*)",
