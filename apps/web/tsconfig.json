@@ -1,20 +1,28 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
+  "extends": "../../packages/typescript-config/nextjs.json",
   "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    // This MUST be in each tsconfig.json file, we can't hoist it to base.json because the path is relative to the file it's defined in
+    "outDir": "dist",
+    // Use only for aliases. Do NOT include references to other packages
+    // https://www.typescriptlang.org/docs/handbook/modules/reference.html#paths-should-not-point-to-monorepo-packages-or-node_modules-packages
+    // Other packages are already resolved by using them as `@repo/package-name` through `package.json` dependencies
+    "paths": {
+      "@web/*": ["./src/*"]
+    },
+    "allowJs": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "noEmit": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts",
-    "next.config.js",
-    ".next/types/**/*.ts"
+  "include": ["**/*.ts", "src", ".next/types/**/*.ts"],
+  "references": [
+    {
+      // This project should probably not depend on `api`, it'd be better if we extracted all the common parts to `common` or another common pkg
+      "path": "../api"
+    },
+    {
+      "path": "../../packages/common"
+    }
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules", "dist", ".next"]
 }

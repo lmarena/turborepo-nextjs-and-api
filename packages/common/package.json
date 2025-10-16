@@ -6,13 +6,16 @@
   "exports": {
     "./*": {
       "types": "./src/*.ts",
-      "default": "./src/*.ts"
+      "default": "./dist/*.js"
     }
   },
   "scripts": {
     "dev": "echo 'Add dev script here'",
-    "build": "echo 'Add build script here'",
+    "build": "tsc -b",
     "test": "echo 'Add test script here'",
     "lint": "echo 'Add lint script here'"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*"
   }
 }

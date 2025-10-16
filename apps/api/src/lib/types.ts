@@ -8,6 +8,11 @@ export interface AppBindings {
   };
 };
 
+export type SharedType = { id: number };
+export const sharedFunction = (sharedType: SharedType): number => {
+  return sharedType.id;
+};
+
 // eslint-disable-next-line ts/no-empty-object-type
 export type AppOpenAPI<S extends Schema = {}> = OpenAPIHono<AppBindings, S>;
 

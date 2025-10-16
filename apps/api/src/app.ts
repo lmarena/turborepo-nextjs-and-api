@@ -1,6 +1,7 @@
-import configureOpenAPI from "@/lib/configure-open-api";
-import createApp from "@/lib/create-app";
-import index from "@/routes/index.route";
+import { meaningOfLife } from "@repo/common/meaning-of-life";
+import configureOpenAPI from "#api/lib/configure-open-api";
+import createApp from "#api/lib/create-app";
+import index from "#api/routes/index.route";
 
 const app = createApp();
 
@@ -11,6 +12,9 @@ const routes = [index] as const;
 routes.forEach((route) => {
   app.route("/", route);
 });
+
+
+console.log(`meaningOfLife: ${meaningOfLife()}`);
 
 export type AppType = (typeof routes)[number];
 

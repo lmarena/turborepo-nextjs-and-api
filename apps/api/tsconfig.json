@@ -1,23 +1,30 @@
 {
+  "extends": "../../packages/typescript-config/base.json",
   "compilerOptions": {
-    "target": "ESNext",
+    // This MUST be in each tsconfig.json file, we can't hoist it to base.json because the path is relative to the file it's defined in
+    "outDir": "dist",
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
-    "baseUrl": "./",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "typeRoots": ["./node_modules/@types"],
-    "types": [
-      "node"
-    ],
-    "strict": true,
-    "outDir": "./dist",
-    "skipLibCheck": true
+    "rootDir": "./src",
+    "sourceMap": true,
+    "inlineSources": true,
+    // make sure vercel uses bundler resolution
+    "moduleResolution": "bundler",
+    // Set `sourceRoot` to  "/" to strip the build path prefix
+    // from generated source code references.
+    // This improves issue grouping in Sentry.
+    "sourceRoot": "/",
+    // For decorators
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declarationMap": true
   },
-  "tsc-alias": {
-    "resolveFullPaths": true
-  }
+  // Include only files in src directory
+  "include": ["src", "src/**/*.json"],
+  "exclude": ["dist", "node_modules"],
+  "references": [
+    {
+      "path": "../../packages/common"
+    }
+  ]
 }

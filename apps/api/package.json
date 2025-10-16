@@ -1,8 +1,17 @@
 {
-  "name": "api",
+  "name": "@repo/api",
   "type": "module",
   "version": "1.0.0",
   "license": "MIT",
+  "imports": {
+    "#api/*": "./src/*.ts"
+  },
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./dist/*.js"
+    }
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node ./dist/src/index.js",
@@ -10,7 +19,7 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint --fix",
     "test": "cross-env NODE_ENV=test vitest",
-    "build": "tsc && tsc-alias"
+    "build": "tsc -b"
   },
   "dependencies": {
     "@hono/node-server": "^1.18.1",
@@ -31,12 +40,13 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.1.0",
+    "@repo/common": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^24.2.0",
     "cross-env": "^10.0.0",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.32.0",
     "eslint-plugin-format": "^1.0.1",
-    "tsc-alias": "^1.8.16",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vitest": "^3.2.1"

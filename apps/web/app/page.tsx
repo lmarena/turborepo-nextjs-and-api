@@ -2,6 +2,7 @@ import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
 import { meaningOfLife } from "@repo/common/meaning-of-life";
+import { sharedFunction } from "@repo/api/lib/types";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -35,7 +36,8 @@ export default function Home() {
         <div>The meaning of life is {meaningOfLife()}</div>
         <ol>
           <li>
-            Get started by editing <code>apps/web/app/page.tsx</code>
+            This contains a shared function from the common package:{" "}
+            {sharedFunction({ id: 42 })}
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
@@ -66,7 +68,7 @@ export default function Home() {
           </a>
         </div>
         <Button appName="web" className={styles.secondary}>
-          Open alert
+          The meaning of life is {meaningOfLife()}
         </Button>
       </main>
       <footer className={styles.footer}>
